@@ -42,6 +42,16 @@ def add_expense():
     print('Расход добавлен 👍')
 
 
+def show_expenses():
+    if not expenses:
+        print('Расходов пока нет 😎')
+        print()
+        return
+    print('=== Все расходы ===')
+    for counter, expense in enumerate(expenses, 1):
+        print(f"{counter}. {expense['title']} - {expense['amount']:.2f} руб. - {expense['category']}")
+
+
 while True:
     show_menu()
     task = input('<_').strip()
@@ -55,3 +65,6 @@ while True:
     elif task == '1':
         print(f'Вы выбрали: {menu_dict[task]}')
         add_expense()
+    elif task == '2':
+        print(f'Вы выбрали: {menu_dict[task]}')
+        show_expenses()
