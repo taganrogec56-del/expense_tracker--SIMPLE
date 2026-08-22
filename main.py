@@ -61,6 +61,28 @@ def show_total():
     print(f'Общая сумма расходов: {total_expenses:.2f} руб.')
 
 
+def show_by_category():
+    category = input('Категория: ').strip().lower()
+    found_category = False
+    total_by_category = 0
+
+    for expense in expenses:
+        if expense['category'].lower() == category:
+            total_by_category += expense['amount']
+
+            if not found_category:
+                found_category = True
+                print(f'=== Категория: {category.capitalize()} ===')
+                print()
+
+            print(f"{expense['title']} - {expense['amount']:.2f} руб.")
+    if found_category:
+        print(f'Всего: {total_by_category:.2f} руб.')
+    else:
+        print()
+        print(f'Расходов в категории "{category.capitalize()}" не найдено.')
+
+
 while True:
     show_menu()
     task = input('<_').strip()
@@ -80,3 +102,6 @@ while True:
     elif task == '3':
         print(f'Вы выбрали: {menu_dict[task]}')
         show_total()
+    elif task == '4':
+        print(f'Вы выбрали: {menu_dict[task]}')
+        show_by_category()
