@@ -52,6 +52,15 @@ def show_expenses():
         print(f"{counter}. {expense['title']} - {expense['amount']:.2f} руб. - {expense['category']}")
 
 
+def show_total():
+    if not expenses:
+        print('Расходов пока нет 😎')
+        print()
+        return
+    total_expenses = sum((expense['amount'] for expense in expenses))
+    print(f'Общая сумма расходов: {total_expenses:.2f} руб.')
+
+
 while True:
     show_menu()
     task = input('<_').strip()
@@ -68,3 +77,6 @@ while True:
     elif task == '2':
         print(f'Вы выбрали: {menu_dict[task]}')
         show_expenses()
+    elif task == '3':
+        print(f'Вы выбрали: {menu_dict[task]}')
+        show_total()
