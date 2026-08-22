@@ -83,6 +83,26 @@ def show_by_category():
         print(f'Расходов в категории "{category.capitalize()}" не найдено.')
 
 
+def show_statistics():
+    if not expenses:
+        print('Категорий еще нет.')
+        return
+
+    categories = {}
+    for expense in expenses:
+        normalize_category = expense['category'].lower()
+
+        if normalize_category not in categories:
+            categories[normalize_category] = expense['amount']
+        else:
+            categories[normalize_category] += expense['amount']
+
+    print('=== Статистика ===')
+    print()
+    for category, amount in categories.items():
+        print(f'{category.capitalize()}: {amount:.2f} руб.')
+
+
 while True:
     show_menu()
     task = input('<_').strip()
@@ -105,3 +125,6 @@ while True:
     elif task == '4':
         print(f'Вы выбрали: {menu_dict[task]}')
         show_by_category()
+    elif task == '5':
+        print(f'Вы выбрали: {menu_dict[task]}')
+        show_statistics()
