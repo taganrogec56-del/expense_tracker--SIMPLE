@@ -1,3 +1,5 @@
+from decimal import Decimal, InvalidOperation
+
 menu_dict = {'1': 'Добавить расход',
              '2': 'Показать все расходы',
              '3': 'Показать общую сумму расходов',
@@ -7,12 +9,37 @@ menu_dict = {'1': 'Добавить расход',
              }
 
 menu_text = '\n'.join([f'{num_task}. {text_task}' for num_task, text_task in menu_dict.items()])
+expenses = []
 
 
 def show_menu():
     print('=== Трекер Расходов ===')
     print()
     print(menu_text)
+
+
+def add_expense():
+    title = input('Введите название: ').strip()
+
+    while True:
+        amount = input('Введите сумму: ').strip()
+        try:
+            amount = Decimal(amount).quantize(Decimal('0.01'))
+            if amount <= 0:
+                print('Сумма не может быть меньше или равной 0 ☝️')
+                continue
+            break
+        except InvalidOperation:
+            print('Неверное значение 😢')
+
+    category = input('Введите категорию: ').strip()
+
+    expenses.append({
+        "title": title,
+        "amount": amount,
+        "category": category
+    })
+    print('Расход добавлен 👍')
 
 
 while True:
@@ -25,5 +52,6 @@ while True:
     if task == '0':
         print('До свидания 😀')
         break
-
-    print(f'Вы выбрали: {menu_dict[task]}')
+    elif task == '1':
+        print(f'Вы выбрали: {menu_dict[task]}')
+        add_expense()
