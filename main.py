@@ -26,11 +26,11 @@ def add_expense():
         try:
             amount = Decimal(amount).quantize(Decimal('0.01'))
             if amount <= 0:
-                print('Сумма не может быть меньше или равной 0 ☝️')
+                print('Сумма не может быть меньше или равной 0')
                 continue
             break
         except InvalidOperation:
-            print('Неверное значение 😢')
+            print('Неверное значение')
 
     category = input('Введите категорию: ').strip()
 
@@ -39,12 +39,12 @@ def add_expense():
         "amount": amount,
         "category": category
     })
-    print('Расход добавлен 👍')
+    print('Расход добавлен')
 
 
 def show_expenses():
     if not expenses:
-        print('Расходов пока нет 😎')
+        print('Расходов пока нет')
         print()
         return
     print('=== Все расходы ===')
@@ -54,7 +54,7 @@ def show_expenses():
 
 def show_total():
     if not expenses:
-        print('Расходов пока нет 😎')
+        print('Расходов пока нет')
         print()
         return
     total_expenses = sum((expense['amount'] for expense in expenses))
@@ -108,10 +108,10 @@ while True:
     task = input('<_').strip()
     print()
     if task not in menu_dict:
-        print('Неверное действие. Такого пункта меню нет. 😢')
+        print('Неверное действие. Такого пункта меню нет.')
         continue
     if task == '0':
-        print('До свидания 😀')
+        print('До свидания')
         break
     elif task == '1':
         print(f'Вы выбрали: {menu_dict[task]}')
